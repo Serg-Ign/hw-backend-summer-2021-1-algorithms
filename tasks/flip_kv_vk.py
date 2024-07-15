@@ -1,5 +1,5 @@
 from typing import TypeVar
-# First commit
+# https://www.techiedelight.com/ru/invert-mapping-dictionary-python/
 __all__ = (
     "flip_kv_vk",
     "flip_kv_vk_safe",
@@ -21,7 +21,9 @@ def flip_kv_vk(d: dict[KT, KV]) -> dict[KV, KT]:
             'Москва': 'moscow',
         }
     """
-    raise NotImplementedError
+    inversed_dict = {d[k]: k for k in d}
+    return inversed_dict
+    # raise NotImplementedError
 
 
 def flip_kv_vk_safe(d: dict[KT, KV]) -> dict[KV, list[KT]]:
@@ -35,4 +37,8 @@ def flip_kv_vk_safe(d: dict[KT, KV]) -> dict[KV, list[KT]]:
             '+3': ['Москва', 'Санкт-Петербург'],
         }
     """
-    raise NotImplementedError
+    inverse_dict = {}
+    for k, v in d.items():
+        inverse_dict.setdefault(v, []).append(k)
+    return inverse_dict
+    # raise NotImplementedError

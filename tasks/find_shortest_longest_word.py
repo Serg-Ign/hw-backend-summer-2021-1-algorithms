@@ -1,3 +1,6 @@
+from typing import Optional
+import string
+
 __all__ = ("find_shortest_longest_word",)
 
 
@@ -14,4 +17,12 @@ def find_shortest_longest_word(text: str) -> tuple[str, str] | tuple[None, None]
         >> find_shortest_longest_word(" \n\t ")
         (None, None)
     """
-    raise NotImplementedError
+    ts = text.strip(string.punctuation+string.whitespace)
+    if len(ts) == 0:
+        return (None, None)
+    for s in string.punctuation+string.whitespace:
+        ts = ts.replace(s, ' ')
+    # End for
+    slList = ts.split()
+    return (min(slList, key=len), max(slList, key=len))
+    # raise NotImplementedError
